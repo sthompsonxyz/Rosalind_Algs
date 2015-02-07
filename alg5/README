@@ -1,0 +1,2 @@
+compile with:
+g++ --std=c++11 ./sequence.cpp ./ros_alg5_DNAGC.cpp -oalg5_answer
