@@ -9,34 +9,7 @@ use List::Util qw/sum/;
 
 my %population = ( k => 0, m => 0, n => 0);
 
-
-sub select_prob {
-	my ($popul, $type) = @_;
-
-	my $total_pop = $popul->{k} + $popul->{m} + $popul->{n};
-	my $probs = $popul->{$type} / $total_pop;
-	if ($popul->{$type} > 0) {
-		$popul->{$type}--;
-		} else {
-			croak "can\'t select $type, there are not enough of this kind";
-		} #but what happens in populations with 0 or 1 of a type?
-
-	return $probs;
-}
-
-
-sub pop_regen {
-	my ($popul, $k, $m, $n) = @_;
-
-		$popul->{k} = $k;
-		$popul->{m} = $m;
-		$popul->{n} = $n;
-
-
-	return $popul;
-}
-
-
+# 1. Setup population from user input:
 print "amount of k (homozygous dominant):\n";
 
 my $k = <STDIN>;
@@ -53,7 +26,7 @@ my $n = <STDIN>;
 chomp $n;
 
 
-# Create list of pair selection probabilities
+# 2. Create list of pair selection probabilities
 my @prob_list;
 
 foreach my $type1 (sort keys %population) {
@@ -69,6 +42,8 @@ foreach my $type1 (sort keys %population) {
 	}
 	print "\n";
 }
+
+# 3. Calculate phenotype combo probabilities:
 
 # list of 9 phenotype probs for expressing dominant trait 
 # corresponding to 3x3 combo pairs
@@ -96,3 +71,36 @@ print "\n";
 print "probability of getting offspring with recessive phenotype:\t\t";
 print sum @rec_probs;
 print "\n";
+
+
+
+
+
+#----------
+#--Helpers
+
+sub select_prob {
+	my ($popul, $type) = @_;
+
+	my $total_pop = $popul->{k} + $popul->{m} + $popul->{n};
+	my $probs = $popul->{$type} / $total_pop;
+	if ($popul->{$type} > 0) {
+		$popul->{$type}--;
+		} else {
+			$probs = 0;
+		}
+
+	return $probs;
+}
+
+
+sub pop_regen {
+	my ($popul, $k, $m, $n) = @_;
+
+		$popul->{k} = $k;
+		$popul->{m} = $m;
+		$popul->{n} = $n;
+
+
+	return $popul;
+}
