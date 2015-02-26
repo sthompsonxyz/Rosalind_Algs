@@ -2,8 +2,6 @@
 
 #include <iostream>
 #include <vector>
-#include <numeric>
-#include <functional>
 #include <algorithm>
 #include <cassert>
 
@@ -61,13 +59,13 @@ int main() {
 	int k, m, n;
 
 	//get number of each type
-	cout << "amount of k:" << endl;
+	cout << "amount of k (homozygous dominant):" << endl;
 	cin >> k;
 
-	cout << "amount of m:" << endl;
+	cout << "amount of m (heterozygous):" << endl;
 	cin >> m;
 
-	cout << "amount of n:" << endl;
+	cout << "amount of n (homozygous recessive):" << endl;
 	cin >> n;
 
 	
