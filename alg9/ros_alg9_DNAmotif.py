@@ -3,6 +3,7 @@
 import re
 import pprint
 import sys
+from Bio import SeqIO
 
 class sequence:
 	name = ''
@@ -77,3 +78,7 @@ print "\nT: ",
 for i in range(0, length-1):
 	print Tprofile[i],
 
+for seq_record in SeqIO.parse("./fastaseqs.fa", "fasta"):
+    print seq_record.id
+    print seq_record.seq
+    print(len(seq_record))
